@@ -1,13 +1,15 @@
+
 const express = require('express');
 const path = require('path');
 const app = express();
 
-app.use('/',express.static('./dist/facebook-photos'));
+// Serve static files....
+app.use(express.static(__dirname + '/dist/facebook-photos'));
 
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname,'./dist/facebook-photos/index.html' ))
+// Send all requests to index.html
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/dist/facebook-photos/index.html'));
 });
 
-app.listen(8080, function () {
-  console.log('Example app listening on port 3000!');
-});
+// default Heroku PORT
+app.listen(process.env.PORT || 3000);
