@@ -6,7 +6,7 @@ import {SocialLoginModule, AuthServiceConfig, LoginOpt} from 'angularx-social-lo
 import { FacebookLoginProvider } from 'angularx-social-login';
 
 const fbLoginOptions: LoginOpt = {
-  scope: 'email,user_birthday,user_location',
+  scope: 'email',
   return_scopes: true,
   enable_profile_selector: true
 };
