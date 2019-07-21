@@ -27,10 +27,10 @@ export class AppComponent implements  OnInit {
     //   this.loggedIn = (user != null);
     // });
 
-    (window as any).fbAsyncInit = function() {
+    (window as any).fbAsyncInit = () => {
       FB.init({
         appId      : '440064053256624',
-        cookie     : false,
+        cookie     : true,
         xfbml      : true,
         version    : 'v3.3'
       });
@@ -50,6 +50,7 @@ export class AppComponent implements  OnInit {
     console.log('submit login to facebook');
     // FB.login();
     FB.login((response) => {
+
       if (response.authResponse) {
         this.getUserPhotos(response.authResponse.userID);
       } else {
