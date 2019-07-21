@@ -1,4 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div (click)="signInWithFB()">login facebook</div>
-<br><br>
-<div (click)="signOut()">sign out</div>
+<!--<div (click)="signInWithFB()">login facebook</div>-->
+<!--<br><br>-->
+<!--<div (click)="signOut()">sign out</div>-->
+
+
+
+
+<button type="button"  (click)="submitLogin();">Login with facebook</button>
+
+
+
+<div class="container">
+  <h1>Facebook Photo Viewer</h1>
+  <div class="images_container">
+    <div class='image' *ngFor="let image of userImages ">
+      <img [src]="image.source">
+    </div>
+  </div>
+</div>

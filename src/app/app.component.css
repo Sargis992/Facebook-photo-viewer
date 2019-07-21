@@ -1,0 +1,19 @@
+.images_container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: #fafbfd;
+}
+
+
+.images_container .image {
+  width: 22%;
+}
+
+.images_container img {
+  width: 100%;
+}
+
+.conainer h1 {
+  text-align: center;
+}
