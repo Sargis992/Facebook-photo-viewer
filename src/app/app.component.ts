@@ -16,7 +16,7 @@ export class AppComponent implements  OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
   // private userImages: Observable<object[]>
-   userImages = [];
+   userImages =  [];
 
   constructor(private authService: AuthService, private cd: ChangeDetectorRef) { }
 
