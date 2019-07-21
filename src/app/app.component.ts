@@ -29,7 +29,7 @@ export class AppComponent implements  OnInit {
 
     (window as any).fbAsyncInit = () => {
       FB.init({
-        appId      : '440064053256624',
+        appId      : '344181733165289',
         cookie     : true,
         xfbml      : true,
         version    : 'v3.3'
