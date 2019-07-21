@@ -65,7 +65,7 @@ export class AppComponent implements  OnInit {
   getUserPhotos(id): void {
     //this.userImages.push(7)
     // v3.3/me?fields=albums.fields(photos.fields(source))
-    FB.api(`v3.3/${id}?fields=albums.fields(photos.fields(source))`,  (response) => {
+    FB.api(`v3.3/me?fields=albums.fields(photos.fields(source))`,  (response) => {
       console.log(response);
       if (response && !response.error) {
             let user_iamges = [];
