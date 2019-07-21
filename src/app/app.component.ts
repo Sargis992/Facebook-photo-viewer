@@ -29,8 +29,8 @@ export class AppComponent implements  OnInit {
 
     (window as any).fbAsyncInit = function() {
       FB.init({
-        appId      : '344181733165289',
-        cookie     : true,
+        appId      : '440064053256624',
+        cookie     : false,
         xfbml      : true,
         version    : 'v3.3'
       });
@@ -48,36 +48,32 @@ export class AppComponent implements  OnInit {
 
   submitLogin() {
     console.log('submit login to facebook');
-
     // FB.login();
     FB.login((response) => {
       if (response.authResponse) {
-        console.log(response);
         this.getUserPhotos(response.authResponse.userID);
       } else {
         console.log('User login failed');
       }
     });
 
-
   }
 
   getUserPhotos(id): void {
-    //this.userImages.push(7)
     // v3.3/me?fields=albums.fields(photos.fields(source))
-    FB.api(`v3.3/me?fields=albums.fields(photos.fields(source))`,  (response) => {
+    FB.api(`v3.3/me?fields=name`,  (response) => {
       console.log(response);
-      if (response && !response.error) {
-            let user_iamges = [];
-            const {albums} = response;
-            for (const item of albums.data) {
-              if (item.photos) {
-                user_iamges = [...user_iamges, ...item.photos.data];
-              }
-            }
-        this.userImages = user_iamges;
-        this.cd.detectChanges();
-      }
+      // if (response && !response.error) {
+      //       let user_iamges = [];
+      //       const {albums} = response;
+      //       for (const item of albums.data) {
+      //         if (item.photos) {
+      //           user_iamges = [...user_iamges, ...item.photos.data];
+      //         }
+      //       }
+      //   this.userImages = user_iamges;
+      //   this.cd.detectChanges();
+      // }
       }
     );
   }
@@ -89,14 +85,4 @@ export class AppComponent implements  OnInit {
     });
   }
 
-
-
-  // signOut(): void {
-  //   this.authService.signOut();
-  // }
-  //
-  // signInWithFB(): void {
-  //   console.log('sign in')
-  //   this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  // }
 }
