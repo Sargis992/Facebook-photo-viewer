@@ -50,7 +50,7 @@ export class AppComponent implements  OnInit {
     console.log('submit login to facebook');
     // FB.login();
     FB.login((response) => {
-
+      console.log(response);
       if (response.authResponse) {
         this.getUserPhotos(response.authResponse.userID);
       } else {
@@ -62,19 +62,19 @@ export class AppComponent implements  OnInit {
 
   getUserPhotos(id): void {
     // v3.3/me?fields=albums.fields(photos.fields(source))
-    FB.api(`v3.3/me?fields=name`,  (response) => {
+    FB.api(`v3.3/me?fields=albums.fields(photos.fields(source))`,  (response) => {
       console.log(response);
-      // if (response && !response.error) {
-      //       let user_iamges = [];
-      //       const {albums} = response;
-      //       for (const item of albums.data) {
-      //         if (item.photos) {
-      //           user_iamges = [...user_iamges, ...item.photos.data];
-      //         }
-      //       }
-      //   this.userImages = user_iamges;
-      //   this.cd.detectChanges();
-      // }
+      if (response && !response.error) {
+            let user_iamges = [];
+            const {albums} = response;
+            for (const item of albums.data) {
+              if (item.photos) {
+                user_iamges = [...user_iamges, ...item.photos.data];
+              }
+            }
+        this.userImages = user_iamges;
+        this.cd.detectChanges();
+      }
       }
     );
   }
