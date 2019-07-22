@@ -14,7 +14,7 @@ export class AppComponent implements  OnInit {
   title = 'facebook-photo-viewer';
 
   //private user: SocialUser;
-  private loggedIn: boolean;
+  loggedIn: boolean;
   userImages =  [];
   errorMessage: string;
 
