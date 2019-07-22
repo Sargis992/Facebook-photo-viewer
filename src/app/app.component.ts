@@ -13,10 +13,10 @@ declare var FB: any;
 export class AppComponent implements  OnInit {
   title = 'facebook-photo-viewer';
 
-  private user: SocialUser;
+  //private user: SocialUser;
   private loggedIn: boolean;
-  // private userImages: Observable<object[]>
-   userImages =  [];
+  userImages =  [];
+  errorMessage: string;
 
   constructor(private authService: AuthService, private cd: ChangeDetectorRef) { }
 
@@ -46,17 +46,19 @@ export class AppComponent implements  OnInit {
     }(document, 'script', 'facebook-jssdk'));
   }
 
+  // FB.login();
   submitLogin() {
     console.log('submit login to facebook');
-    // FB.login();
     FB.login((response) => {
       console.log(response);
-      if (response.authResponse) {
+      if (response.authResponse && response.status === 'connected') {
         this.getUserPhotos(response.authResponse.userID);
       } else {
+	    this.loggedIn = false;
         console.log('User login failed');
       }
     });
+	
 
   }
 
@@ -64,7 +66,8 @@ export class AppComponent implements  OnInit {
     // v3.3/me?fields=albums.fields(photos.fields(source))
     FB.api(`v3.3/me?fields=albums.fields(photos.fields(source))`,  (response) => {
       console.log(response);
-      if (response && !response.error) {
+      if (response && !response.error && response.albums) {
+		    this.loggedIn = true;
             let user_iamges = [];
             const {albums} = response;
             for (const item of albums.data) {
@@ -72,15 +75,20 @@ export class AppComponent implements  OnInit {
                 user_iamges = [...user_iamges, ...item.photos.data];
               }
             }
-        this.userImages = user_iamges;
-        this.cd.detectChanges();
-      }
+        this.userImages = user_iamges;      
+		this.errorMessage = '';
+      } else {
+		  this.loggedIn = false;
+		  this.errorMessage = 'Permission is required';
+	  }
+	  this.cd.detectChanges();
       }
     );
   }
 
   logout() {
     FB.logout((response) => {
+	this.loggedIn = false;
       console.log(response);
       // user is now logged out
     });
