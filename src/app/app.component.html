@@ -1,34 +1,26 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!--<div (click)="signInWithFB()">login facebook</div>-->
-<!--<br><br>-->
-<!--<div (click)="signOut()">sign out</div>-->
 
-
-
+<div>
 <div *ngIf="!loggedIn">
 	<h1 class='center'>Facebook Photo Viewer</h1>
-	<!-- <button type="button"  (click)="submitLogin();">Login with facebook</button> -->
 	<a href="#" class="fb btn" (click)="submitLogin();">
           <i class="fa fa-facebook fa-fw"></i> Login with Facebook
     </a>
-	<!-- <div class="fb-login-button fc" data-width="" data-size="large" data-button-type="login_with" (click)="submitLogin();"
-	data-auto-logout-link="true" data-use-continue-as="false"></div> -->
 	<div class='center'>
-	Login in your with Facebook and you will see your Photos
+	Login via Facebook and to fetch your Photos
 	</div>
 </div>
 
 
 
-
-
-
 <div class="container"  *ngIf="loggedIn">
   <h2 class='center'>Facebook Photo Viewer</h2>
+  <h2 class='center' *ngIf="!isLoading">Loading data ...</h2>
+  <h6 class='center' *ngIf="errorMessage">{{errorMessage}}</h6>
   <button (click)="logout();" class='logout'>Logout</button>
   <div class="images_container">
     <div class='image' *ngFor="let image of userImages ">
       <img [src]="image.source">
     </div>
   </div>
+</div>
 </div>
